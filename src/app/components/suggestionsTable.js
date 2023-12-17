@@ -9,6 +9,8 @@ import {
   TableContainer,
 } from "@chakra-ui/react";
 
+import Link from "next/link";
+
 export default function SuggestionsTable({ suggestions }) {
   return (
     <TableContainer>
@@ -26,7 +28,9 @@ export default function SuggestionsTable({ suggestions }) {
         <Tbody>
           {suggestions.map((suggestion, index) => (
             <Tr key={index}>
-              <Td>{suggestion.name}</Td>
+              <Td>
+                <Link href={`/city/${suggestion.id}`}> {suggestion.name} </Link>
+              </Td>
               <Td>{suggestion.longitude}</Td>
               <Td>{suggestion.latitude}</Td>
               <Td>{suggestion.country}</Td>

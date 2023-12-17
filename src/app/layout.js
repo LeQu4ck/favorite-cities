@@ -1,11 +1,9 @@
 import NavBar from "./components/navbar";
 import Footer from "./components/footer";
-import { ColorModeScript } from "@chakra-ui/react";
 import { Providers } from "./providers";
 
 import "./globals.css";
 import theme from "./theme";
-
 //const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -17,7 +15,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <ColorModeScript initialColorMode={theme.config.initialColorMode} />
         <NavBar />
         <Providers>{children}</Providers>
         <Footer />

@@ -14,10 +14,8 @@ import {
   Heading,
   Text,
   Divider,
-  Button,
   Input,
   InputGroup,
-  InputRightElement,
 } from "@chakra-ui/react";
 
 import SuggestionsTable from "./components/suggestionsTable";
@@ -33,10 +31,6 @@ const Home = () => {
     setSuggestions(suggestions);
   };
 
-  const handleSearch = () => {
-    console.log(`Searching for: ${searchTerm}`);
-  };
-
   const fetchSuggestionsFromAPI = async (value) => {
     try {
       const response = await fetch(
@@ -50,6 +44,7 @@ const Home = () => {
       const data = await response.json();
       console.log(data);
       return data.results.map((city) => ({
+        id: city.id,
         name: city.name,
         latitude: city.latitude,
         longitude: city.longitude,
@@ -97,13 +92,8 @@ const Home = () => {
                 value={searchTerm}
                 onChange={(e) => handleSearchChange(e.target.value)}
               />
-              <InputRightElement width="4.5rem">
-                <Button h="1.75rem" size="sm" onClick={handleSearch}>
-                  Search
-                </Button>
-              </InputRightElement>
             </InputGroup>
-
+            {/* Display suggestions */}
             {suggestions.length > 0 && (
               <SuggestionsTable suggestions={suggestions} />
             )}
