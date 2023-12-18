@@ -19,7 +19,7 @@ export default function NavBar() {
           Home
         </Link>
         <Link href="/favorite" marginLeft="10">
-          Favorite
+          Favourite
         </Link>
         <Link href="/about" marginLeft="10">
           About
