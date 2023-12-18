@@ -13,7 +13,7 @@ export default function Footer() {
       color="white"
       textAlign="center"
     >
-      © 2023 Favorite Cities
+      © 2023 Favourite Cities
     </Box>
   );
 }
