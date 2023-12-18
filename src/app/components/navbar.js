@@ -1,7 +1,6 @@
 import { Box, Flex, Link, Button } from "@chakra-ui/react";
 
 export default function NavBar() {
- 
   return (
     <Flex
       as="nav"
@@ -16,10 +15,13 @@ export default function NavBar() {
         Favorite cities
       </Link>
       <Box>
-        <Link href="/" marginLeft="4">
+        <Link href="/" marginLeft="10">
           Home
         </Link>
-        <Link href="/about" marginLeft="4">
+        <Link href="/favorite" marginLeft="10">
+          Favorite
+        </Link>
+        <Link href="/about" marginLeft="10">
           About
         </Link>
       </Box>
