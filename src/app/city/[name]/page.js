@@ -2,6 +2,8 @@
 import { useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 
+import CityCard from "@/app/components/cityCard";
+
 export default function City() {
   const params = useParams();
   const cityID = params.name;
@@ -11,7 +13,7 @@ export default function City() {
     const fetchCityByID = async () => {
       try {
         const response = await fetch(
-          `https://geocoding-api.open-meteo.com/v1/get?id=${cityID}`
+          `https://geocoding-api.open-meteo.com/v1/get?id=${cityID}&population`
         );
 
         if (!response.ok) {
@@ -30,17 +32,8 @@ export default function City() {
 
   return (
     <div>
-      {cityData && (
-        <div>
-          <h1>City: {cityData.name}</h1>
-
-          <div>
-            <p>Latitude: {cityData.latitude}</p>
-            <p>Longitude: {cityData.longitude}</p>
-            <p>Country: {cityData.country}</p>
-          </div>
-        </div>
-      )}
+      {" "}
+      {cityData && <CityCard City={cityData} />}
     </div>
   );
 }

@@ -16,6 +16,8 @@ import {
   Divider,
   Input,
   InputGroup,
+  Button,
+  useColorMode,
 } from "@chakra-ui/react";
 
 import SuggestionsTable from "./components/suggestionsTable";
@@ -56,6 +58,7 @@ const Home = () => {
     }
   };
 
+ 
   return (
     <Container
       maxW="container.lg"
@@ -72,6 +75,8 @@ const Home = () => {
         boxSize="350"
         objectFit="cover"
       />
+
+
 
       <Card maxW="800" marginTop="20px" variant="outline" marginBottom="20">
         <CardBody>
