@@ -18,7 +18,13 @@ import {
 import { useState } from "react";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar, faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faStar,
+  faMapMarkerAlt,
+  faUsers,
+  faClock,
+  faMountain,
+} from "@fortawesome/free-solid-svg-icons";
 
 export default function CityCard({ City }) {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -28,20 +34,13 @@ export default function CityCard({ City }) {
   };
 
   return (
-    <Container maxW="800">
-      <Card
-        marginTop="20"
-        variant="outline"
-        p="4"
-        boxShadow="lg"
-        borderRadius="lg"
-      >
+    <Container maxW="800" marginTop="20" marginBottom="10">
+      <Card variant="outline" p="4" boxShadow="lg" borderRadius="lg">
         <CardHeader bgColor="blue.100" p="2" borderRadius="20">
           <Image
             boxSize="64px"
             src={`https://flagsapi.com/${City.country_code}/shiny/64.png`}
             alt={`${City.country} Flag`}
-            m="2"
           />
 
           <Flex flexDirection="column" alignItems="center">
@@ -53,11 +52,27 @@ export default function CityCard({ City }) {
             >
               <Box>
                 <Heading size="md" fontWeight="bold" color="gray.600">
-                  {City.name}, {City.country}
+                  {City.name}, {City.country} ({City.country_code})
                 </Heading>
+
                 <Text fontSize="sm" color="gray.500">
                   <FontAwesomeIcon icon={faMapMarkerAlt} /> Latitude:{" "}
                   {City.latitude}, Longitude: {City.longitude}
+                </Text>
+
+                <Text fontSize="sm" color="gray.500">
+                  <FontAwesomeIcon icon={faClock} /> Timezone: {City.timezone}
+                </Text>
+
+                <Text fontSize="sm" color="gray.500">
+                  <FontAwesomeIcon icon={faMountain} /> Elevation:{" "}
+                  {City.elevation}m
+                </Text>
+
+                <Text fontSize="sm" color="gray.500">
+                  <FontAwesomeIcon icon={faUsers} />
+                  Population:{" "}
+                  {City.population?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") || "Unknown"}
                 </Text>
               </Box>
               <Box>
@@ -72,9 +87,7 @@ export default function CityCard({ City }) {
           </Flex>
         </CardHeader>
 
-        <CardBody p="2">
-          <Text>Population: {City.population || "Unknown"}</Text>
-        </CardBody>
+        <CardBody p="2"></CardBody>
 
         <CardFooter
           justify="space-between"
