@@ -48,12 +48,20 @@ export default function WeatherCard({ WeatherData }) {
         bg="gray.600"
       >
         <CardHeader bgColor="blue.100" p="2" borderRadius="20">
-          <Heading size="md" fontWeight="bold" color="gray.600">
-            {new Intl.DateTimeFormat("en-US", {
+          <Heading
+            size="md"
+            fontWeight="bold"
+            color="gray.600"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+          >
+            {new Date(Day.time).toLocaleDateString("en-US", {
               weekday: "short",
               day: "numeric",
-            }).format(new Date(Day.time))}
+            })}
           </Heading>
+
           <Box
             color="gray.500"
             display="flex"
@@ -128,15 +136,15 @@ export default function WeatherCard({ WeatherData }) {
         borderRadius="lg"
         key={time}
         width="125px"
-        // highlight the first day
       >
         <CardHeader bgColor="blue.100" p="2" borderRadius="20">
-          <Heading size="md" fontWeight="bold" color="gray.600">
-            {new Intl.DateTimeFormat("en-US", {
+          <Heading size="md" fontWeight="bold" color="gray.600" display="flex" justifyContent="center" alignItems="center">
+            {new Date(Day.time).toLocaleDateString("en-US", {
               weekday: "short",
               day: "numeric",
-            }).format(new Date(Day.time))}
+            })}
           </Heading>
+
           <Box
             color="gray.500"
             display="flex"

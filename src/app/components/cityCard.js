@@ -55,21 +55,21 @@ export default function CityCard({ City }) {
                   {City.name}, {City.country} ({City.country_code})
                 </Heading>
 
-                <Text fontSize="sm" color="gray.500">
+                <Text fontSize="sm" fontWeight="600" color="gray.500">
                   <FontAwesomeIcon icon={faMapMarkerAlt} /> Latitude:{" "}
                   {City.latitude}, Longitude: {City.longitude}
                 </Text>
 
-                <Text fontSize="sm" color="gray.500">
+                <Text fontSize="sm" fontWeight="600" color="gray.500">
                   <FontAwesomeIcon icon={faClock} /> Timezone: {City.timezone}
                 </Text>
 
-                <Text fontSize="sm" color="gray.500">
+                <Text fontSize="sm" fontWeight="600" color="gray.500">
                   <FontAwesomeIcon icon={faMountain} /> Elevation:{" "}
                   {City.elevation}m
                 </Text>
 
-                <Text fontSize="sm" color="gray.500">
+                <Text fontSize="sm" fontWeight="600" color="gray.500">
                   <FontAwesomeIcon icon={faUsers} />
                   Population:{" "}
                   {City.population?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") || "Unknown"}
