@@ -7,6 +7,7 @@ import WeatherCard from "@/app/components/cityWeatherCard";
 import HourlyChart from "@/app/components/cityHourlyWeatherCard";
 
 import { Container, Box, Text } from "@chakra-ui/react";
+import axios from "axios";
 
 export default function City() {
   const params = useParams();
@@ -71,6 +72,7 @@ export default function City() {
         console.error(error.message);
       }
     };
+
 
     const fetchCityByID = async () => {
       const cityData = await fetchCityData();

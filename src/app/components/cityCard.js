@@ -15,7 +15,7 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -26,9 +26,26 @@ import {
   faClock,
   faMountain,
 } from "@fortawesome/free-solid-svg-icons";
+import { set } from "mongoose";
 
 export default function CityCard({ City }) {
   const [isFavorite, setIsFavorite] = useState(false);
+
+  useEffect(() => {
+    const checkFav = async () => {
+      await axios
+        .get(`/api/checkfavourite/${City.id}`)
+        .then((response) => {
+          if (response.message === true) {
+            setIsFavorite(true);
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    };
+    checkFav();
+  }, []);
 
   const addToFavourite = async () => {
     let city = {
@@ -44,7 +61,7 @@ export default function CityCard({ City }) {
 
     try {
       if (method === "POST") {
-        axios
+        await axios
           .post("/api/favourite", city)
           .then((response) => {
             console.log(response.data);
@@ -52,15 +69,15 @@ export default function CityCard({ City }) {
           .catch((error) => {
             console.log(error);
           });
-      }else{
-        axios
-        .delete("/api/favourite", city)
-        .then((response) => {
-          console.log(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      } else {
+        await axios
+          .delete("/api/favourite", { data: city })
+          .then((response) => {
+            console.log(response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       }
     } catch (error) {
       console.log(error);

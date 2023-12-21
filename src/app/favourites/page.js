@@ -10,20 +10,21 @@ export default function Favourite() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("/api/favourite")
-      .then((response) => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("/api/favourite");
         setData(response.data);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error(error);
-      });
+      }
+    };
+    fetchData();
   }, []);
 
   return (
     <div>
       {data.map((item) => (
-        <SavedCity key={item.id} city={item} />
+        <SavedCity key={item.id} City={item} />
       ))}
     </div>
   );
