@@ -16,6 +16,7 @@ import {
 } from "@chakra-ui/react";
 
 import { useState } from "react";
+import axios from "axios";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -29,8 +30,41 @@ import {
 export default function CityCard({ City }) {
   const [isFavorite, setIsFavorite] = useState(false);
 
-  const handleFavoriteClick = () => {
+  const addToFavourite = async () => {
+    let city = {
+      id: City.id,
+      name: City.name,
+      latitude: City.latitude,
+      longitude: City.longitude,
+      country: City.country,
+    };
+
+    const method = isFavorite ? "DELETE" : "POST";
     setIsFavorite(!isFavorite);
+
+    try {
+      if (method === "POST") {
+        axios
+          .post("/api/favourite", city)
+          .then((response) => {
+            console.log(response.data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }else{
+        axios
+        .delete("/api/favourite", city)
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -72,7 +106,9 @@ export default function CityCard({ City }) {
                 <Text fontSize="sm" fontWeight="600" color="gray.500">
                   <FontAwesomeIcon icon={faUsers} />
                   Population:{" "}
-                  {City.population?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") || "Unknown"}
+                  {City.population
+                    ?.toString()
+                    .replace(/\B(?=(\d{3})+(?!\d))/g, ".") || "Unknown"}
                 </Text>
               </Box>
               <Box>
@@ -80,7 +116,7 @@ export default function CityCard({ City }) {
                   aria-label="Add to favorites"
                   icon={<FontAwesomeIcon icon={faStar} />}
                   colorScheme={isFavorite ? "yellow" : "gray"}
-                  onClick={handleFavoriteClick}
+                  onClick={addToFavourite}
                 />
               </Box>
             </Flex>

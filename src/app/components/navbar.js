@@ -33,7 +33,7 @@ export default function NavBar() {
           <Link href="/" marginLeft="10">
             Home
           </Link>
-          <Link href="/favorite" marginLeft="10">
+          <Link href="/favourites" marginLeft="10">
             Favourite
           </Link>
           <Link href="/about" marginLeft="10">
