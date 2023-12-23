@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { Box } from "@chakra-ui/react";
 
 import axios from "axios";
 
@@ -22,10 +23,10 @@ export default function Favourite() {
   }, []);
 
   return (
-    <div>
+    <Box display="flex" justifyContent="center">
       {data.map((item) => (
         <SavedCity key={item.id} City={item} />
       ))}
-    </div>
+    </Box>
   );
 }

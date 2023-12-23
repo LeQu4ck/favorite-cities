@@ -1,5 +1,6 @@
 import Favourite from "../../../../models/favouriteModel";
 import connectMongo from "../../../../database/connection";
+import City from "@/app/city/[cityID]/page";
 //import { NextResponse } from "next/server";
 
 export async function GET(req) {
@@ -12,6 +13,10 @@ export async function GET(req) {
 export async function POST(req) {
   await connectMongo();
   const city = await req.json();
+  const res = await Favourite.findOne({ id: city.id });
+  if (res) {
+    return Response.json({ message: "City is already saved" });
+  }
   const favouriteCity = await new Favourite(city);
   await favouriteCity.save();
   return Response.json({ message: "City added to favourites!" });
@@ -19,9 +24,10 @@ export async function POST(req) {
 
 export async function DELETE(req) {
   await connectMongo();
-  const city = await req.body;
-  const cityID = city.id
-  console.log(city);
-  await Favourite.findOneAndDelete({ cityID });
+  const city = await req.json();
+  const cityID = await city.id;
+
+  const cityToDelete = Favourite.findOne({ id: cityID });
+  await cityToDelete.deleteOne();
   return Response.json({ message: "City deleted from favourites!" });
 }

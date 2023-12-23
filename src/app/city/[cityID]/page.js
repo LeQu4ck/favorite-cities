@@ -7,11 +7,10 @@ import WeatherCard from "@/app/components/cityWeatherCard";
 import HourlyChart from "@/app/components/cityHourlyWeatherCard";
 
 import { Container, Box, Text } from "@chakra-ui/react";
-import axios from "axios";
 
 export default function City() {
   const params = useParams();
-  const cityID = params.name;
+  const cityID = params.cityID;
 
   const [cityData, setCityData] = useState(null);
   const [weatherData, setWeatherData] = useState(null);

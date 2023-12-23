@@ -22,6 +22,10 @@ const favouriteSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  countryCode: {
+    type: String,
+    required: true,
+  },
 });
 
 const Favourite =

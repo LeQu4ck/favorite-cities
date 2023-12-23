@@ -26,18 +26,21 @@ import {
   faClock,
   faMountain,
 } from "@fortawesome/free-solid-svg-icons";
-import { set } from "mongoose";
 
 export default function CityCard({ City }) {
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(null);
 
   useEffect(() => {
     const checkFav = async () => {
+      console.log(City.id);
       await axios
         .get(`/api/checkfavourite/${City.id}`)
         .then((response) => {
-          if (response.message === true) {
+         // console.log(response.data);
+          if (response.data.message === true) {
             setIsFavorite(true);
+          } else {
+            setIsFavorite(false);
           }
         })
         .catch((error) => {
@@ -45,7 +48,7 @@ export default function CityCard({ City }) {
         });
     };
     checkFav();
-  }, []);
+  }, [City.id]);
 
   const addToFavourite = async () => {
     let city = {
@@ -54,6 +57,7 @@ export default function CityCard({ City }) {
       latitude: City.latitude,
       longitude: City.longitude,
       country: City.country,
+      countryCode: City.country_code,
     };
 
     const method = isFavorite ? "DELETE" : "POST";
