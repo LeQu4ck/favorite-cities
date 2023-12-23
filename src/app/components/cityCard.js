@@ -13,6 +13,7 @@ import {
   Text,
   Image,
   IconButton,
+  Skeleton,
 } from "@chakra-ui/react";
 
 import { useState, useEffect } from "react";
@@ -36,7 +37,7 @@ export default function CityCard({ City }) {
       await axios
         .get(`/api/checkfavourite/${City.id}`)
         .then((response) => {
-         // console.log(response.data);
+          // console.log(response.data);
           if (response.data.message === true) {
             setIsFavorite(true);
           } else {
